@@ -34,12 +34,12 @@ Docker Image'ını çalıştırın
 #### Altyazı ara
 
 ```http
-  GET /subtitles?{id}&{text}
+  GET /subtitles?{url}&{text}
 ```
 
 | Parameter |   Tip    |                        Açıklama                        |
 |:---------:|:--------:|:------------------------------------------------------:|
-|   `id`    | `string` |            **Gerekli**. Youtube Video URL.             |
+|   `url`   | `string` |            **Gerekli**. Youtube Video URL.             |
 |  `text`   | `string` | **Gerekli**. Video'da bulmak istediğiniz kelime/cümle. |
 
 ## Kullanılan Teknolojiler

@@ -8,11 +8,9 @@ import (
 )
 
 func SetupRoutes(c *echo.Echo) {
-	logger := middleware.LoggerWithConfig(middleware.LoggerConfig{
-		Format: `{"Time": [${time_rfc3339}], "Method": "${method}", "Path": "${path}", "Status": ${status}, "Latency": "${latency_human}", UserAgent: ${user_agent}, "Error": ${error}}`,
-	})
-
-	c.Use(logger)
+	c.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
+		Format: `{"Time": ${time_rfc3339}, "Method": "${method}", "Path": "${path}", "Status": ${status},"Latency": "${latency_human}", UserAgent: ${user_agent}, "Error": ${error}}\n`,
+	}))
 
 	c.GET("/subtitles", handler.GetSubtitles)
 }

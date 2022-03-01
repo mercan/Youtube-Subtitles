@@ -56,7 +56,7 @@ func GetSubtitles(c echo.Context) error {
 
 	if u.Host == "www.youtube.com" || u.Host == "youtube.com" {
 		videoId = u.Query().Get("v") // Get the video id from the url
-	} else {
+	} else { // https://youtu.be/<id>
 		videoId = u.Path[1:] // remove first slash
 	}
 

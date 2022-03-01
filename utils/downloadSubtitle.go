@@ -39,6 +39,6 @@ func DownloadSubtitles(videoID string) error {
 		return err
 	}
 
-	log.Printf("Subtitle Downloaded Successfully VideoID: %s\n", videoID)
+	log.Printf("Subtitles Downloaded Successfully VideoID: %s\n", videoID)
 	return nil
 }

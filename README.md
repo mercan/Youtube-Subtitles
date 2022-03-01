@@ -1,6 +1,6 @@
 # YouTube Subtitles
 
-**YouTube**'da altyazısı olan veya otomatik olarak oluşturulan altyazı olan videoda istediğiniz kelimenin hangi saat, dakika ve saniye'de geçtiğini size gösterip aradığınız şeyi hızlıca bulmanızı sağlar.
+**YouTube**'da altyazısı olan veya otomatik olarak oluşturulan altyazı olan videoda istediğiniz kelimenin hangi saat, dakika ve saniye de geçtiğini size gösterip aradığınız şeyi hızlıca bulmanızı sağlar.
 
 Örnek [Request](http://localhost:3000/subtitles?url=https://www.youtube.com/watch?v=ARNNNmhSPME&text=değil)
 

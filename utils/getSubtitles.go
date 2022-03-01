@@ -54,7 +54,7 @@ type EndTime struct {
 var pwd, _ = os.Getwd()
 var subtitleFolderPath = path.Join(pwd, "subtitles")
 
-func getSubtitlesFolder() ([]os.DirEntry, error) {
+func readSubtitlesFolder() ([]os.DirEntry, error) {
 	files, err := os.ReadDir(subtitleFolderPath)
 	if err != nil {
 		return nil, err
@@ -63,8 +63,8 @@ func getSubtitlesFolder() ([]os.DirEntry, error) {
 	return files, nil
 }
 
-func getSubtitlesFile(videoId string) (*os.File, error) {
-	files, err := getSubtitlesFolder()
+func readSubtitlesFile(videoId string) (*os.File, error) {
+	files, err := readSubtitlesFolder()
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ func getSubtitlesFile(videoId string) (*os.File, error) {
 	return nil, nil
 }
 
-func removeSubtitlesFile(videoId string) error {
+func deleteSubtitlesFile(videoId string) error {
 	if err := os.Remove(path.Join(subtitleFolderPath, videoId+".tr.ttml")); err != nil {
 		return err
 	}
@@ -94,7 +94,7 @@ func removeSubtitlesFile(videoId string) error {
 }
 
 func GetSubtitles(videoId string) ([]Subtitle, error) {
-	xmlFile, err := getSubtitlesFile(videoId)
+	xmlFile, err := readSubtitlesFile(videoId)
 	if err != nil {
 		return nil, err
 	}
@@ -147,7 +147,7 @@ func GetSubtitles(videoId string) ([]Subtitle, error) {
 		subtitles = append(subtitles, subtitle)
 	}
 
-	if err := removeSubtitlesFile(videoId); err != nil {
+	if err := deleteSubtitlesFile(videoId); err != nil {
 		log.Printf("Error removing subtitle file: %s\n", err.Error())
 	}
 

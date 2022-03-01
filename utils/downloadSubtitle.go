@@ -34,7 +34,7 @@ func DownloadSubtitles(videoID string) error {
 	if err := cmd.Start(); err != nil {
 		return err
 	}
-
+	
 	if err := cmd.Wait(); err != nil {
 		return err
 	}

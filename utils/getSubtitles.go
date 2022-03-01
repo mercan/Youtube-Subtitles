@@ -107,7 +107,8 @@ func GetSubtitles(videoId string) ([]Subtitle, error) {
 		return nil, err
 	}
 
-	subtitles := make([]Subtitle, 0)
+	subtitles := make([]Subtitle, 0, len(xmlParse.Body.Div.P))
+
 	for _, subtitle := range xmlParse.Body.Div.P {
 		const (
 			HoursIndex   = 0

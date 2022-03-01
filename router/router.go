@@ -14,5 +14,5 @@ func SetupRoutes(c *echo.Echo) {
 
 	c.Use(logger)
 
-	c.GET("/subtitle", handler.GetSubtitle)
+	c.GET("/subtitles", handler.GetSubtitles)
 }

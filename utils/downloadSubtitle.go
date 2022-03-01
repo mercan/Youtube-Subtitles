@@ -15,7 +15,7 @@ const (
 	subFormatExt       = "--sub-format=ttml"
 )
 
-func DownloadSubtitle(videoID string) error {
+func DownloadSubtitles(videoID string) error {
 	cmd := exec.Command("youtube-dl",
 		noCheckCertificate,
 		skipDownload,

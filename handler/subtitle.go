@@ -25,7 +25,7 @@ type ErrorResponse struct {
 	Message string `json:"message"`
 }
 
-func GetSubtitle(c echo.Context) error {
+func GetSubtitles(c echo.Context) error {
 	videoURL := c.QueryParam("url")
 	text := c.QueryParam("text")
 
@@ -60,7 +60,7 @@ func GetSubtitle(c echo.Context) error {
 		videoId = u.Path[1:] // remove first slash
 	}
 
-	if err := utils.DownloadSubtitle(videoId); err != nil {
+	if err := utils.DownloadSubtitles(videoId); err != nil {
 		return c.JSON(http.StatusInternalServerError, ErrorResponse{
 			Status:  http.StatusInternalServerError,
 			Message: "The video has no subtitles",

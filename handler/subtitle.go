@@ -75,7 +75,7 @@ func GetSubtitles(c echo.Context) error {
 		})
 	}
 
-	filteredSubtitles := utils.FilterSubtitles(videoId, subtitles, text)
+	filteredSubtitles := utils.FilterSubtitles(videoId, text, subtitles)
 	video := Video{
 		ID:        videoId,
 		Subtitles: filteredSubtitles,

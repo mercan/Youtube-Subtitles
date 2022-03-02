@@ -33,19 +33,13 @@ type PTag struct {
 }
 
 type Subtitle struct {
-	Text     string    `json:"text"`
-	Begin    BeginTime `json:"begin"`
-	End      EndTime   `json:"end"`
-	VideoURL string    `json:"videoURL"`
+	Text     string `json:"text"`
+	Begin    Time   `json:"begin"`
+	End      Time   `json:"end"`
+	VideoURL string `json:"videoURL"`
 }
 
-type BeginTime struct {
-	Hours   int `json:"hours"`
-	Minutes int `json:"minutes"`
-	Seconds int `json:"seconds"`
-}
-
-type EndTime struct {
+type Time struct {
 	Hours   int `json:"hours"`
 	Minutes int `json:"minutes"`
 	Seconds int `json:"seconds"`
@@ -129,12 +123,12 @@ func GetSubtitles(videoId string) ([]Subtitle, error) {
 		eMinutes, _ := strconv.Atoi(sEnd[MinutesIndex])
 		eSeconds, _ := strconv.Atoi(strings.Split(sEnd[SecondsIndex], ".")[0]) // Remove milliseconds
 
-		beginTime := &BeginTime{
+		beginTime := &Time{
 			Hours:   bHours,
 			Minutes: bMinutes,
 			Seconds: bSeconds,
 		}
-		endTime := &EndTime{
+		endTime := &Time{
 			Hours:   eHours,
 			Minutes: eMinutes,
 			Seconds: eSeconds,

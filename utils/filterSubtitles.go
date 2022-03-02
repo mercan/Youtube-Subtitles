@@ -5,7 +5,7 @@ import (
 	"regexp"
 )
 
-func videoEmbedURL(videoId string, begin BeginTime, end EndTime) string {
+func videoEmbedURL(videoId string, begin, end Time) string {
 	return fmt.Sprintf("https://www.youtube.com/embed/%s?start=%d&end=%d",
 		videoId,
 		begin.Hours*3600+begin.Minutes*60+begin.Seconds,
@@ -13,8 +13,8 @@ func videoEmbedURL(videoId string, begin BeginTime, end EndTime) string {
 	)
 }
 
-func FilterSubtitles(videoId string, subtitles []Subtitle, text string) []Subtitle {
-	var filteredSubtitles = make([]Subtitle, 0)
+func FilterSubtitles(videoId, text string, subtitles []Subtitle) []Subtitle {
+	filteredSubtitles := make([]Subtitle, 0)
 
 	for _, subtitle := range subtitles {
 		if regexp.MustCompile(`(?i)` + text + `\b`).MatchString(subtitle.Text) {

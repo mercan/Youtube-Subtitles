@@ -25,6 +25,12 @@ type ErrorResponse struct {
 	Message string `json:"message"`
 }
 
+func validateYoutubeURL(youtubeURL string) bool {
+	re := regexp.MustCompile("^((http|https)\\:\\/\\/)?(www\\.youtube\\.com|youtube\\.com|youtu\\.?be)\\/((watch\\?v=)?([a-zA-Z0-9_]{11}))(&.*)*$")
+	return re.MatchString(youtubeURL)
+
+}
+
 func GetSubtitles(c echo.Context) error {
 	videoURL := c.QueryParam("url")
 	text := c.QueryParam("text")
@@ -43,7 +49,8 @@ func GetSubtitles(c echo.Context) error {
 		})
 	}
 
-	match, _ := regexp.MatchString("^((http|https)\\:\\/\\/)?(www\\.youtube\\.com|youtube\\.com|youtu\\.?be)\\/((watch\\?v=)?([a-zA-Z0-9_]{11}))(&.*)*$", videoURL)
+	match := validateYoutubeURL(videoURL)
+
 	if !match {
 		return c.JSON(http.StatusBadRequest, ErrorResponse{
 			Status:  http.StatusBadRequest,

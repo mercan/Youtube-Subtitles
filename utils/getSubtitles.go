@@ -27,9 +27,9 @@ type DivTag struct {
 
 type PTag struct {
 	XMLName xml.Name `xml:"p"`
+	Text    string   `xml:",chardata"`
 	Begin   string   `xml:"begin,attr"`
 	End     string   `xml:"end,attr"`
-	Text    string   `xml:",chardata"`
 }
 
 type Subtitle struct {

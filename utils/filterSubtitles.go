@@ -17,7 +17,7 @@ func FilterSubtitles(videoId, text string, subtitles []Subtitle) []Subtitle {
 	filteredSubtitles := make([]Subtitle, 0)
 
 	for _, subtitle := range subtitles {
-		if regexp.MustCompile(`(?i)` + text + `\b`).MatchString(subtitle.Text) {
+		if regexp.MustCompile("(?i)" + "\\b" + text + "\\b").MatchString(subtitle.Text) {
 			filteredSubtitles = append(filteredSubtitles, Subtitle{
 				Text:  subtitle.Text,
 				Begin: subtitle.Begin,

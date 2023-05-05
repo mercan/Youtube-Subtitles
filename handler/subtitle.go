@@ -1,11 +1,11 @@
 package handler
 
 import (
+	"github.com/mercan/Go-Youtube-Subtitles/utils"
+
 	"net/http"
 	"net/url"
 	"regexp"
-
-	"github.com/mercan/Go-Youtube-Subtitles/utils"
 
 	"github.com/labstack/echo/v4"
 )
@@ -28,7 +28,6 @@ type ErrorResponse struct {
 func validateYoutubeURL(youtubeURL string) bool {
 	re := regexp.MustCompile("^((http|https)\\:\\/\\/)?(www\\.youtube\\.com|youtube\\.com|youtu\\.?be)\\/((watch\\?v=)?([a-zA-Z0-9_]{11}))(&.*)*$")
 	return re.MatchString(youtubeURL)
-
 }
 
 func GetSubtitles(c echo.Context) error {
@@ -49,19 +48,16 @@ func GetSubtitles(c echo.Context) error {
 		})
 	}
 
-	match := validateYoutubeURL(videoURL)
-
-	if !match {
+	if match := validateYoutubeURL(videoURL); !match {
 		return c.JSON(http.StatusBadRequest, ErrorResponse{
 			Status:  http.StatusBadRequest,
-			Message: "Invalid video id",
+			Message: "Invalid youtube url",
 		})
 	}
 
-	u, err := url.Parse(videoURL)
 	var videoId string
 
-	if u.Host == "www.youtube.com" || u.Host == "youtube.com" {
+	if u, _ := url.Parse(videoURL); u.Host == "www.youtube.com" || u.Host == "youtube.com" {
 		videoId = u.Query().Get("v") // Get the video id from the url
 	} else { // https://youtu.be/<id>
 		videoId = u.Path[1:] // remove first slash

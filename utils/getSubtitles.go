@@ -93,7 +93,12 @@ func GetSubtitles(videoId string) ([]Subtitle, error) {
 		return nil, err
 	}
 
+	if xmlFile == nil {
+		return nil, nil
+	}
+
 	defer xmlFile.Close()
+
 	byteValue, _ := ioutil.ReadAll(xmlFile)
 	xmlParse := XML{}
 
@@ -107,7 +112,7 @@ func GetSubtitles(videoId string) ([]Subtitle, error) {
 		const (
 			HoursIndex   = 0
 			MinutesIndex = 1
-			SecondsIndex = 2 // seconds + milliseconds
+			SecondsIndex = 2
 		)
 
 		// Parse begin time
@@ -116,9 +121,12 @@ func GetSubtitles(videoId string) ([]Subtitle, error) {
 		sEnd := strings.Split(subtitle.End, ":")
 
 		// Convert string to int
+		// Begin time
 		bHours, _ := strconv.Atoi(sBegin[HoursIndex])
 		bMinutes, _ := strconv.Atoi(sBegin[MinutesIndex])
 		bSeconds, _ := strconv.Atoi(strings.Split(sBegin[SecondsIndex], ".")[0]) // Remove milliseconds
+
+		// End time
 		eHours, _ := strconv.Atoi(sEnd[HoursIndex])
 		eMinutes, _ := strconv.Atoi(sEnd[MinutesIndex])
 		eSeconds, _ := strconv.Atoi(strings.Split(sEnd[SecondsIndex], ".")[0]) // Remove milliseconds
@@ -128,11 +136,13 @@ func GetSubtitles(videoId string) ([]Subtitle, error) {
 			Minutes: bMinutes,
 			Seconds: bSeconds,
 		}
+
 		endTime := &Time{
 			Hours:   eHours,
 			Minutes: eMinutes,
 			Seconds: eSeconds,
 		}
+
 		subtitle := Subtitle{
 			Text:  subtitle.Text,
 			Begin: *beginTime,
@@ -142,6 +152,7 @@ func GetSubtitles(videoId string) ([]Subtitle, error) {
 		subtitles = append(subtitles, subtitle)
 	}
 
+	// Remove subtitle file
 	if err := deleteSubtitlesFile(videoId); err != nil {
 		log.Printf("Error removing subtitle file: %s\n", err.Error())
 	}

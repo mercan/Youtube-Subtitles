@@ -1,8 +1,9 @@
 package main
 
 import (
+	router "github.com/mercan/Go-Youtube-Subtitles/router"
+
 	"github.com/labstack/echo/v4"
-	"github.com/mercan/Go-Youtube-Subtitles/router"
 )
 
 func main() {

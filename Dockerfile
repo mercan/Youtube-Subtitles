@@ -1,27 +1,32 @@
 # syntax=docker/dockerfile:1
-FROM golang:1.17-alpine
+FROM golang:1.18-alpine
 
 RUN apk upgrade
 RUN apk add --no-cache curl
-RUN curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
-RUN chmod a+rx /usr/local/bin/youtube-dl
+RUN curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp
+RUN chmod a+rx /usr/local/bin/yt-dlp
 
 # install dependencies
 RUN apk update \ && apk add python3-dev
 RUN ln -s /usr/bin/python3 /usr/local/bin/python
 
-WORKDIR /app
+# Set the Current Working Directory inside the container
+WORKDIR /usr/app
 
-# Copy everything from the current directory to the PWD (Present Working Directory) inside the container
-COPY ../asdad .
+# Copy the go.mod and go.sum files
+COPY go.* ./
 
 # Download all the dependencies
 RUN go mod download
 
-# Build the application
-RUN go build -o /Go-Youtube-Subtitles
+# Copy everything from the current directory to the PWD (Present Working Directory) inside the container
+COPY . ./
 
+# Build the Go app
+RUN go build -o ./GoYoutubeSubtitles
+
+# This container exposes port 3000 to the outside world
 EXPOSE 3000
 
-# Run the application
-CMD [ "/Go-Youtube-Subtitles" ]
+# Run the executable
+CMD ["./GoYoutubeSubtitles"]

@@ -6,18 +6,16 @@ import (
 )
 
 const (
-	noCheckCertificate = "--no-check-certificate"
-	skipDownload       = "--skip-download"
-	writeAutoSub       = "--write-auto-sub"
-	subLanguage        = "--sub-lang=tr"
-	outputFlag         = "-o"
-	outputPath         = "subtitles/%(id)s.%(ext)s"
-	subFormatExt       = "--sub-format=ttml"
+	skipDownload = "--skip-download"
+	writeAutoSub = "--write-auto-sub"
+	subLanguage  = "--sub-lang=tr"
+	outputFlag   = "-o"
+	outputPath   = "subtitles/%(id)s.%(ext)s"
+	subFormatExt = "--sub-format=ttml"
 )
 
-func DownloadSubtitles(videoID string) error {
-	cmd := exec.Command("youtube-dl",
-		noCheckCertificate,
+func DownloadSubtitles(videoId string) error {
+	cmd := exec.Command("yt-dlp",
 		skipDownload,
 		writeAutoSub,
 		subLanguage,
@@ -25,7 +23,7 @@ func DownloadSubtitles(videoID string) error {
 		outputFlag,
 		outputPath,
 		"--",
-		videoID,
+		videoId,
 	)
 
 	cmd.Stdout = nil
@@ -34,11 +32,11 @@ func DownloadSubtitles(videoID string) error {
 	if err := cmd.Start(); err != nil {
 		return err
 	}
-	
+
 	if err := cmd.Wait(); err != nil {
 		return err
 	}
 
-	log.Printf("Subtitles Downloaded Successfully VideoID: %s\n", videoID)
+	log.Printf("Subtitles Downloaded Successfully VideoID: %s\n", videoId)
 	return nil
 }

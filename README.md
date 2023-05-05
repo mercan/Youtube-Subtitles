@@ -1,8 +1,8 @@
 # YouTube Subtitles
 
-**YouTube**'da altyazısı olan veya otomatik olarak oluşturulmuş altyazılı videolarda  istediğiniz kelimenin hangi saat, dakika ve saniye de geçtiğini size gösterip aradığınız şeyi hızlıca bulmanızı sağlar.
+**YouTube'da**, altyazısı olan veya otomatik olarak oluşturulmuş videolarda, istenilen kelime veya cümle hangi saat, 
+dakika ve saniye aralığında geçtiğini göstererek, kullanıcının aradığı metni hızlıca bulmasını sağlar.
 
-Örnek [Request](http://localhost:3000/subtitles?url=https://www.youtube.com/watch?v=ARNNNmhSPME&text=değil)
 
 ## Bilgisayarınızda Çalıştırın
 
@@ -21,29 +21,23 @@ Proje dizinine gidin
 Docker Build alın
 
 ```bash
-    docker build -t go-youtube-subtitles .
+  docker build -t go-youtube-subtitles .
 ```
 
 Docker Image'ını çalıştırın
 
 ```bash
-    docker run -p 3000:3000 -it go-youtube-subtitles
+  docker run -p 3000:3000 -it go-youtube-subtitles
 ```
 ## API Kullanımı
 
-#### Altyazı ara
+#### Altyazı Ara
 
 ```http
-  GET /subtitles?{url}&{text}
+  GET /subtitles?url=YoutubeVideoURL&text=AranacakKelimeVeyaCümle
 ```
 
 | Parameter |   Tip    |                        Açıklama                        |
 |:---------:|:--------:|:------------------------------------------------------:|
 |   `url`   | `string` |            **Gerekli**. Youtube Video URL.             |
 |  `text`   | `string` | **Gerekli**. Video'da bulmak istediğiniz kelime/cümle. |
-
-## Kullanılan Teknolojiler
-
-**Sunucu:** Go, Echo, Youtube-dl, Docker
-
-  

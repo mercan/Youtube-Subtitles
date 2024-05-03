@@ -14,19 +14,17 @@ func videoEmbedURL(videoId string, begin, end Time) string {
 }
 
 func FilterSubtitles(videoId, text string, subtitles []Subtitle) []Subtitle {
-	filteredSubtitles := make([]Subtitle, 0)
-
+	filteredSubtitles := make([]Subtitle, 0, len(subtitles))	
+	
+	re := regexp.MustCompile(`(?i)\b` + text + `\b`)
+	
 	for _, subtitle := range subtitles {
-		if regexp.MustCompile("(?i)" + "\\b" + text + "\\b").MatchString(subtitle.Text) {
+		if re.MatchString(subtitle.Text) {
 			filteredSubtitles = append(filteredSubtitles, Subtitle{
-				Text:  subtitle.Text,
-				Begin: subtitle.Begin,
-				End:   subtitle.End,
-				VideoURL: videoEmbedURL(
-					videoId,
-					subtitle.Begin,
-					subtitle.End,
-				),
+				Text:     subtitle.Text,
+				Begin:    subtitle.Begin,
+				End:      subtitle.End,
+				VideoURL: videoEmbedURL(videoId, subtitle.Begin, subtitle.End),
 			})
 		}
 	}

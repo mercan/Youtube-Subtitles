@@ -2,7 +2,8 @@ package utils
 
 import (
 	"encoding/xml"
-	"io/ioutil"
+	"errors"
+	"io"
 	"log"
 	"os"
 	"path"
@@ -63,20 +64,26 @@ func readSubtitlesFile(videoId string) (*os.File, error) {
 		return nil, err
 	}
 
+	if len(files) == 0 {
+		return nil, errors.New("subtitles folder is empty")
+	}
+
 	// Find the subtitle file that starts with the video id
 	for _, file := range files {
 		if file.Name() == videoId+".tr.ttml" {
-			subtitleFilePath := path.Join(subtitleFolderPath, file.Name())
+			matchingFile := file
+			subtitleFilePath := path.Join(subtitleFolderPath, matchingFile.Name())
 
-			if subtitleFile, err := os.Open(subtitleFilePath); err != nil {
+			subtitleFile, err := os.Open(subtitleFilePath)
+			if err != nil {
 				return nil, err
-			} else {
-				return subtitleFile, nil
 			}
+
+			return subtitleFile, nil
 		}
 	}
 
-	return nil, nil
+	return nil, errors.New("subtitle file not found")
 }
 
 func deleteSubtitlesFile(videoId string) error {
@@ -84,6 +91,7 @@ func deleteSubtitlesFile(videoId string) error {
 		return err
 	}
 
+	log.Printf("Subtitle file deleted: %s\n", videoId+".tr.ttml")
 	return nil
 }
 
@@ -94,12 +102,12 @@ func GetSubtitles(videoId string) ([]Subtitle, error) {
 	}
 
 	if xmlFile == nil {
-		return nil, nil
+		return nil, err
 	}
 
 	defer xmlFile.Close()
 
-	byteValue, _ := ioutil.ReadAll(xmlFile)
+	byteValue, _ := io.ReadAll(xmlFile)
 	xmlParse := XML{}
 
 	if err := xml.Unmarshal(byteValue, &xmlParse); err != nil {

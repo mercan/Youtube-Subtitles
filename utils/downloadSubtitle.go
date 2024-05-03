@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"bytes"
 	"log"
 	"os/exec"
 )
@@ -14,29 +15,28 @@ const (
 	subFormatExt = "--sub-format=ttml"
 )
 
-func DownloadSubtitles(videoId string) error {
-	cmd := exec.Command("yt-dlp",
-		skipDownload,
-		writeAutoSub,
-		subLanguage,
-		subFormatExt,
-		outputFlag,
-		outputPath,
-		"--",
-		videoId,
-	)
+func buildFlags(videoId string) []string {
+	return []string{skipDownload, writeAutoSub, subLanguage, subFormatExt, outputFlag, outputPath, "--", videoId}
+}
 
-	cmd.Stdout = nil
-	cmd.Stderr = nil
+func DownloadSubtitles(videoId string) error {
+	flags := buildFlags(videoId)
+	cmd := exec.Command("yt-dlp", flags...)
+
+	var out, err bytes.Buffer
+	cmd.Stdout = &out
+	cmd.Stderr = &err
 
 	if err := cmd.Start(); err != nil {
+		log.Printf("Error downloading subtitles for video ID %s: %v\n", videoId, err)
 		return err
 	}
 
 	if err := cmd.Wait(); err != nil {
+		log.Printf("Error downloading subtitles for video ID %s: %v\n", videoId, err)
 		return err
 	}
 
-	log.Printf("Subtitles Downloaded Successfully VideoID: %s\n", videoId)
+	log.Printf("Subtitles downloaded for video ID %s: %s\n", videoId, out.String())
 	return nil
 }

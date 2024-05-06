@@ -1,23 +1,27 @@
 Allows users to quickly find the desired text in YouTube videos by showing the time, minute, and second intervals where the desired word or sentence appears in videos with subtitles or auto-generated subtitles.
+
+&nbsp;
+&nbsp;
+
 ### Run on Your Computer
 
 #### 1. Clone the Project:
 
 ```bash
-  git clone https://github.com/mercan/Go-Youtube-Subtitles.git
+  git clone https://github.com/mercan/Youtube-Subtitles.git
 ```
 
 #### 2. Go to Project Directory:
 
 ```bash
-    cd Go-Youtube-Subtitles
+    cd Youtube-Subtitles
 ```
 
 ### Using Docker
 
 #### Build the Docker Image:
 
-This command builds a Docker image named go-youtube-subtitles containing your project code.
+This command builds a Docker image named youtube-subtitles containing your project code.
 
 ```bash
     make build
@@ -31,6 +35,8 @@ This command starts the Docker container based on the built image. It maps the c
     make run
 ```
 
+&nbsp;
+
 ### Available Commands:
 
 You can use the following Makefile commands to manage the Docker image:
@@ -40,10 +46,9 @@ You can use the following Makefile commands to manage the Docker image:
 * make help: Displays this help message.
 * make clean: Stops and removes any running container and the built image.
 
-&nbsp;
-
 **Note:** Make sure you have Docker installed and running on your system to use these commands.
 
+&nbsp;
 
 ### API Usage
 

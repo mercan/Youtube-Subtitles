@@ -2,6 +2,8 @@ FROM golang:1.18-alpine
 
 RUN apk upgrade
 RUN apk add --no-cache curl
+
+# install yt-dlp
 RUN curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp
 RUN chmod a+rx /usr/local/bin/yt-dlp
 
@@ -22,10 +24,10 @@ RUN go mod download
 COPY . ./
 
 # Build the Go app
-RUN go build -o ./GoYoutubeSubtitles
+RUN go build -o ./YoutubeSubtitles
 
-# This container exposes port 3000 to the outside world
+# This container exposes port 8080 to the outside world
 EXPOSE 8080
 
 # Run the executable
-CMD ["./GoYoutubeSubtitles"]
+CMD ["./YoutubeSubtitles"]

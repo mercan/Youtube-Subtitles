@@ -14,5 +14,5 @@ func main() {
 	router.SetupRoutes(e)
 
 	// Start server
-	e.Logger.Fatal(e.Start(":3000"))
+	e.Logger.Fatal(e.Start(":8080"))
 }

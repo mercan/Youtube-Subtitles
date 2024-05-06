@@ -1,4 +1,3 @@
-# syntax=docker/dockerfile:1
 FROM golang:1.18-alpine
 
 RUN apk upgrade
@@ -26,7 +25,7 @@ COPY . ./
 RUN go build -o ./GoYoutubeSubtitles
 
 # This container exposes port 3000 to the outside world
-EXPOSE 3000
+EXPOSE 8080
 
 # Run the executable
 CMD ["./GoYoutubeSubtitles"]

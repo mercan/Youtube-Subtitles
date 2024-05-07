@@ -14,7 +14,7 @@ Allows users to quickly find the desired text in YouTube videos by showing the t
 #### 2. Go to Project Directory:
 
 ```bash
-    cd Youtube-Subtitles
+  cd Youtube-Subtitles
 ```
 
 ### Using Docker
@@ -24,7 +24,7 @@ Allows users to quickly find the desired text in YouTube videos by showing the t
 This command builds a Docker image named youtube-subtitles containing your project code.
 
 ```bash
-    make build
+  make build
 ```
 
 #### Run the Docker Image:
@@ -32,11 +32,11 @@ This command builds a Docker image named youtube-subtitles containing your proje
 This command starts the Docker container based on the built image. It maps the container port 8080 to the host port 8080 by default, but you can specify a different port number by setting the `PORT` environment variable.
 
 ```bash
-    make run
+  make run
 ```
 
 ```bash
-    make run PORT=3000
+  make run PORT=3000
 ```
 
 #### Stop the Docker Container:
@@ -44,7 +44,7 @@ This command starts the Docker container based on the built image. It maps the c
 To stop the running Docker container, execute:
 
 ```bash
-    make stop
+  make stop
 ```
 
 #### Show Logs:
@@ -52,7 +52,7 @@ To stop the running Docker container, execute:
 To view the logs of the running Docker container, use:
 
 ```bash
-    make logs
+  make logs
 ```
 
 #### Remove the Docker Image and Container:
@@ -60,8 +60,9 @@ To view the logs of the running Docker container, use:
 To remove the Docker image and container, execute:
 
 ```bash
-    make clean
+  make clean
 ```
+
 &nbsp;
 
 ### Available Commands:

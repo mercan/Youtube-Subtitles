@@ -29,12 +29,39 @@ This command builds a Docker image named youtube-subtitles containing your proje
 
 #### Run the Docker Image:
 
-This command starts the Docker container based on the built image. It maps the container port 8080 to the host port 8080.
+This command starts the Docker container based on the built image. It maps the container port 8080 to the host port 8080 by default, but you can specify a different port number by setting the `PORT` environment variable.
 
 ```bash
     make run
 ```
 
+```bash
+  make run PORT=3000
+```
+
+#### Stop the Docker Container:
+
+To stop the running Docker container, execute:
+
+```bash
+  make stop
+```
+
+#### Show Logs:
+
+To view the logs of the running Docker container, use:
+
+```bash
+  make logs
+```
+
+#### Remove the Docker Image and Container:
+
+To remove the Docker image and container, execute:
+
+```bash
+  make clean
+```
 &nbsp;
 
 ### Available Commands:
@@ -43,8 +70,10 @@ You can use the following Makefile commands to manage the Docker image:
 
 * make build: Builds the Docker image.
 * make run: Runs the Docker image.
-* make help: Displays this help message.
+* make stop: Stops the running Docker container.
+* make logs: Shows the logs of the Docker container.
 * make clean: Stops and removes any running container and the built image.
+* make help: Displays a help message about available commands.
 
 **Note:** Make sure you have Docker installed and running on your system to use these commands.
 

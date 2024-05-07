@@ -55,7 +55,7 @@ To view the logs of the running Docker container, use:
   make logs
 ```
 
-#### Remove the Docker Image and Container:
+#### Remove the Docker Image and Container:
 
 To remove the Docker image and container, execute:
 

@@ -88,10 +88,10 @@ You can use the following Makefile commands to manage the Docker image:
   GET /subtitles?url=YoutubeVideoURL&text=SearchTerm
 ```
 
-| Parameter | Type     | Description                  |
-| :-------- | :------- | :--------------------------- |
-| `url` | `string` | **Required.** Youtube Video URL. |
-| `text` | `string` | **Required.**. The word/sentence you want to find in the video. |
+| Parameter  | Type     | Description                                                    |
+|:-----------|:---------|:---------------------------------------------------------------|
+| `url`      | `string` | **Required.** Youtube Video URL.                               |
+| `text`     | `string` | **Required.** The word/sentence you want to find in the video. |
 
 #### Example Usage
 

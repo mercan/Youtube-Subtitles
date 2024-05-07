@@ -36,7 +36,7 @@ This command starts the Docker container based on the built image. It maps the c
 ```
 
 ```bash
-  make run PORT=3000
+    make run PORT=3000
 ```
 
 #### Stop the Docker Container:
@@ -44,7 +44,7 @@ This command starts the Docker container based on the built image. It maps the c
 To stop the running Docker container, execute:
 
 ```bash
-  make stop
+    make stop
 ```
 
 #### Show Logs:
@@ -52,7 +52,7 @@ To stop the running Docker container, execute:
 To view the logs of the running Docker container, use:
 
 ```bash
-  make logs
+    make logs
 ```
 
 #### Remove the Docker Image and Container:
@@ -60,7 +60,7 @@ To view the logs of the running Docker container, use:
 To remove the Docker image and container, execute:
 
 ```bash
-  make clean
+    make clean
 ```
 &nbsp;
 

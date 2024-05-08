@@ -1,4 +1,4 @@
-FROM golang:1.18-alpine
+FROM golang:1.21-alpine
 
 RUN apk upgrade
 RUN apk add --no-cache curl
@@ -24,7 +24,7 @@ RUN go mod download
 COPY . ./
 
 # Build the Go app
-RUN go build -o ./YoutubeSubtitles
+RUN go build -o YoutubeSubtitles ./cmd/server/main.go
 
 # This container exposes port 8080 to the outside world
 EXPOSE 8080

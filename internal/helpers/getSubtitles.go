@@ -1,4 +1,4 @@
-package utils
+package helpers
 
 import (
 	"encoding/xml"

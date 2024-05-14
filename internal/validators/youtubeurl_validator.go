@@ -5,6 +5,8 @@ import (
 	"regexp"
 )
 
+var youtubeURLRegex = regexp.MustCompile(`^(?:https?://)?(?:www\.)?(?:youtube\.com/watch\?v=|youtu\.be/)([a-zA-Z0-9_-]{11})$`)
+
 func youtubeURLValidation(fl validator.FieldLevel) bool {
 	url := fl.Field().String()
 
@@ -12,7 +14,5 @@ func youtubeURLValidation(fl validator.FieldLevel) bool {
 		return true
 	}
 
-	re := regexp.MustCompile("^((http|https)\\:\\/\\/)?(www\\.youtube\\.com|youtube\\.com|youtu\\.?be)\\/((watch\\?v=)?([a-zA-Z0-9_]{11}))(&.*)*$")
-
-	return re.MatchString(url)
+	return youtubeURLRegex.MatchString(url)
 }
